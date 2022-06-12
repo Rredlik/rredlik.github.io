@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Добавление задачи
+{% endblock %}
+
+{% block content %}
+<div class="px-4 py-5 my-5 text-center">
+  <h2>Создать задачу</h2>
+  <form class="needs-validation" method="post">
+    {% csrf_token %}
+    <div class="col-lg-6 mx-auto">
+    {{ form.title }}<br>
+    {{ form.task }}<br>
+    </div>
+    <button type="submit" class="w-40 btn btn-primary btn-lg">Добавить задачу</button>
+    <span>{{ error }}</span>
+  </form>
+</div>
+{% endblock %}

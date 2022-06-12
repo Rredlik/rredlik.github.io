@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Supa clicker
+{% endblock %}
+
+
+{% block js_additional %}
+  <script type="text/javascript" src="{% static 'js/game.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+<div class="px-4 py-5 my-5">
+      <h1 class="display-5 fw-bold text-center">Игра!</h1>
+      <br>
+    <div class="container-fluid">
+      <div class="row gx-4">
+
+            <div class="col-sm">
+                <ul class="list-group list-group-flush border border-info border-5">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col display-6 text-start">БАЛАНС :</div>
+                              <div class="col-6 display-6 text-end">
+                                  <span id='coins'>
+                                    {{core.coins}}
+                                  </span>
+                              </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                          <div class="row">
+                              <div class="col display-7 text-start">Невероятная мощь клика:</div>
+                              <div class="col-6 display-7 text-end">
+                                  <span class="display-7" id="click_power">
+                                      {{ core.click_power }}
+                                  </span>
+                              </div>
+                          </div>
+                    </li>
+
+                    <li class="list-group-item">
+                          <div class="row">
+                              <div class="col display-7 text-start">Невероятная мощь авто-клика:</div>
+                              <div class="col-6 display-7 text-end">
+                                  <span class="display-7" id="auto_click_power">
+                                      {{ core.auto_click_power }}
+                                  </span>
+                              </div>
+                          </div>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="col-sm text-center display-1">
+                <image height="300" src="{% static 'images/coin.png' %}" onclick="call_click()"></image>
+            </div>
+
+
+            <div class="col-sm text-center">
+                <div class="row-cols-auto">
+                    <aside class="boosts border border-info border-5" id="boosts">
+                        <h3 class="display-6">БУСТЫ</h3>
+                        <div class="d-grid gap-2 mx-auto" role="group" aria-label="Vertical button group" id="boosts-holder">
+                            {% for boost in boosts %}
+                                <button class="boost_{{boost.type}} btn btn-outline-secondary" id="boost_{{boost.id}}" onclick="buy_boost({{boost.id}})">
+                                    <div class="row">
+                                        <div class="col">lvl: <span id="boost_level">{{boost.level}}</span></div>
+                                        <div class="col">+<span id="boost_power">{{boost.power}}</span></div>
+                                        <div class="col"><span class="text-end" id="boost_price">{{boost.price}}</span></div>
+                                    </div>
+                                </button>
+                            {% endfor %}
+                        </div>
+                    </aside>
+                </div>
+            </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Вход
+{% endblock %}
+
+{% block content %}
+<div class="px-4 py-5 my-5 text-center">
+  <h1 class="display-5 fw-bold">Привет!</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">Введи данные ниже, чтобы войти.</p><br>
+  </div>
+
+    <div class="col-lg-2 mx-auto">
+
+      <div class="form-floating mb-3">
+        <form action="{% url 'login' %}" method="post" class="p-4 p-md-5 border rounded-3 bg-light">
+          {% csrf_token %}
+          <div class="col-lg-15">
+            <label class="form-label">Никнейм:</label>
+            {{ form.username }}
+          </div>
+          <br>
+          <div class="col-lg-15">
+            <label class="form-label">Пароль:</label>
+            {{ form.password }}
+          </div>
+          <br>
+          <button type="submit" class="w-50 btn btn-primary btn-lg">Войти</button><br>
+          <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+          <a href="{% url 'register' %}">Нет аккаунта?</a>
+        </form><br>
+      </div>
+
+      {% if form.errors %}
+      <p>{{ form.errors.error }}</p>
+      {% endif %}
+    </div>
+</div>
+{% endblock %}
